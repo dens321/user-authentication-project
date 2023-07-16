@@ -10,10 +10,12 @@ app.use(express.urlencoded({extended: true}));
 app.post('/', (req, res) => {
     console.log('Server Hit!')
     const {username, password} = req.body;
-    console.log(req.body);
-    console.log(username);
-    console.log(password);
-    res.send('Data Received!')
+    if(username === "dnns" && password === "anggara"){
+        res.status(200).send('Login Successful');
+    }
+    else {
+        res.status(401).send('Invalid Credentials');
+    }
 })
 
 const PORT = 8000;
