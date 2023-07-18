@@ -24,22 +24,22 @@ app.get('/landingPage', (req, res) => {
     res.sendFile(path.join(__dirname, 'view', 'landingPage.html'));
 })
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'view', 'signup.html'))
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'view', 'login.html'))
 })
 
-app.post('/register', (req, res) => {
-    console.log('Server Hit! (register route)')
-    const {username, password, email} = req.body;
-    const id = crypto.randomBytes(16).toString('hex'); // generate random char for user ID
-    // response
-    res.status(201).send({
-        message: "User Created Successfully",
-        userId: id,
-        username: username,
-        email: email
-    });
-})
+// app.post('/register', (req, res) => {
+//     console.log('Server Hit! (register route)')
+//     const {username, password, email} = req.body;
+//     const id = crypto.randomBytes(16).toString('hex'); // generate random char for user ID
+//     // response
+//     res.status(201).send({
+//         message: "User Created Successfully",
+//         userId: id,
+//         username: username,
+//         email: email
+//     });
+// })
 
 app.all('/*', (req, res) => {
     res.send("invalid url");
