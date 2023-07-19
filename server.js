@@ -4,6 +4,7 @@ const crypto = require('crypto');
 const cors = require('cors');
 const path = require('path');
 const auth = require('./middleware/auth')
+const jwt = require('jsonwebtoken');
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,7 @@ app.post('/login', (req, res) => {
     console.log('Server Hit! (login route)');
     const {username, password} = req.body;
     if(username === "dnns" && password === "anggara"){
+        
         res.redirect('/landingPage')
     }
     else {
