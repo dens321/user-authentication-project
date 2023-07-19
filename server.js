@@ -3,10 +3,12 @@ const app = express();
 const crypto = require('crypto');
 const cors = require('cors');
 const path = require('path');
+const auth = require('./middleware/auth')
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+// static for serving static content
 app.use('/static', express.static('view'))
 
 app.post('/login', (req, res) => {
@@ -20,26 +22,28 @@ app.post('/login', (req, res) => {
     }
 })
 
-app.get('/landingPage', (req, res) => {
+// landing page route
+app.get('/landingPage', auth, (req, res) => {
     res.sendFile(path.join(__dirname, 'view', 'landingPage.html'));
 })
 
-app.get('/login', (req, res) => {
+// login page route
+app.get('/login', (req, res) => {  
     res.sendFile(path.join(__dirname, 'view', 'login.html'))
 })
 
-// app.post('/register', (req, res) => {
-//     console.log('Server Hit! (register route)')
-//     const {username, password, email} = req.body;
-//     const id = crypto.randomBytes(16).toString('hex'); // generate random char for user ID
-//     // response
-//     res.status(201).send({
-//         message: "User Created Successfully",
-//         userId: id,
-//         username: username,
-//         email: email
-//     });
-// })
+app.post('/register', (req, res) => {
+    console.log('Server Hit! (register route)')
+    const {username, password, email} = req.body;
+    const id = crypto.randomBytes(16).toString('hex'); // generate random char for user ID
+    // response
+    res.status(201).send({
+        message: "User Created Successfully",
+        userId: id,
+        username: username,
+        email: email
+    });
+})
 
 app.all('/*', (req, res) => {
     res.send("invalid url");
