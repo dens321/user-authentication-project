@@ -12,7 +12,7 @@ async function postInfo(e) {
     return ;  
     }
 
-    const res = await fetch(baseUrl, {
+    fetch(baseUrl, {
         method: 'POST',
         headers: {
         "Content-Type": "application/json"
@@ -22,11 +22,17 @@ async function postInfo(e) {
             password: passwordInput.value
             })
         })
-    if(res.redirected){
-        location.href = res.url;
+        .then(response => response.json()).then(data => {
+            console.log(data)
+            document.getElementById("response").textContent += data.authorization;
+        });
+    // if(res.status === 200){
+    //     document.getElementById("response").textContent += res;
+    //     console.log(res);
+    //     // location.href = "/landingPage";
 
-    } else{
-        alert('Invalid Credentials');
-        return ;
-    }
+    // } else{
+    //     alert('Invalid Credentials');
+    //     return ;
+    // }
 }

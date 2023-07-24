@@ -17,8 +17,10 @@ app.post('/login', (req, res) => {
     console.log('Server Hit! (login route)');
     const {username, password} = req.body;
     if(username === "dnns" && password === "anggara"){
-        
-        res.redirect('/landingPage')
+        const token = jwt.sign({username: username}, process.env.ACCESS_TOKEN, {expiresIn: "30s"});
+        res.status(200).send({
+            authorization: token
+        })
     }
     else {
         res.status(401).send('Invalid Credentials');
