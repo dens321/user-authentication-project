@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const auth = require('./middleware/auth')
 const jwt = require('jsonwebtoken');
+require('dotenv').config({path:"./vars/.env"}); // .env variables
 
 app.use(cors());
 app.use(express.json());
@@ -51,8 +52,8 @@ app.all('/*', (req, res) => {
     res.send("invalid url");
 })
 
-const PORT = 8000;
+const port = process.env.PORT;
 
-app.listen(PORT, () => {
-    console.log(`Server is up and listening on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is up and listening on http://localhost:${port}`);
 })
