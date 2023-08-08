@@ -55,8 +55,8 @@ app.all('/*', (req, res) => {
     res.send("invalid url");
 })
 
-const port = process.env.PORT;
-
+// const port = process.env.PORT;
+const port = 8000;
 app.listen(port, () => {
     console.log(`Server is up and listening on http://localhost:${port}`);
 })
