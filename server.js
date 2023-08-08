@@ -37,6 +37,7 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'view', 'login.html'))
 })
 
+// register route
 app.post('/register', (req, res) => {
     console.log('Server Hit! (register route)')
     const {username, password, email} = req.body;
